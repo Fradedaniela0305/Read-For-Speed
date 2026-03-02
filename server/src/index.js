@@ -24,6 +24,30 @@ app.get("/health", async (req, res) => {
   }
 });
 
+app.get("/attempts", async (req, res) => {
+  try {
+    const userId = req.query.userId;
+    if (typeof userId !== "string" || !userId) {
+      return res.status(400).json({ error: "userId query param required" });
+    }
+
+    const limit = Math.min(parseInt(req.query.limit ?? "10", 10) || 10, 50);
+
+    const result = await pool.query(
+      `select *
+       from attempts
+       where user_id = $1
+       order by created_at desc
+       limit $2`,
+      [userId, limit]
+    );
+
+    res.json({ attempts: result.rows });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch attempts" });
+  }
+});
 
 
 app.post("/attempts", async(req,res) => {
@@ -51,6 +75,10 @@ app.post("/attempts", async(req,res) => {
   }
  
     })
+
+
+const asyncHandler = fn => (req, res, next) =>
+  Promise.resolve(fn(req, res, next)).catch(next);
 
 
 app.listen(process.env.PORT || 3001, () => {
