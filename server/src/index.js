@@ -27,14 +27,14 @@ app.get("/health", async (req, res) => {
 app.get("/attempts", async (req, res) => {
   try {
     const userId = req.query.userId;
-    if (typeof userId !== "string" || !userId) {
-      return res.status(400).json({ error: "userId query param required" });
+    const limit = Math.min(parseInt(req.query.limit || "10", 10), 50);
+
+    if (!userId) {
+      return res.status(400).json({ error: "userId is required" });
     }
 
-    const limit = Math.min(parseInt(req.query.limit ?? "10", 10) || 10, 50);
-
     const result = await pool.query(
-      `select *
+      `select id, user_id, created_at, drill_type, target_wpm, accuracy, effective_speed
        from attempts
        where user_id = $1
        order by created_at desc
@@ -79,6 +79,7 @@ app.post("/attempts", async(req,res) => {
 
 const asyncHandler = fn => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
+
 
 
 app.listen(process.env.PORT || 3001, () => {
