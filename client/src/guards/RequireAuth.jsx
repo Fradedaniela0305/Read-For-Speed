@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-export default function ProtectedRoute() {
+export default function RequireAuth() {
   const { session } = useAuth()
 
   if ( session === undefined) {
@@ -15,6 +15,5 @@ export default function ProtectedRoute() {
   if (!session) {
     return <Navigate to="/signin" />
   }
-
   return <Outlet />;
 }

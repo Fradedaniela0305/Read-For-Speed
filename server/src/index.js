@@ -1,20 +1,22 @@
-import express from "express";
-import cors from "cors";
-import "dotenv/config";
+import express from "express"
+import cors from "cors"
+import "dotenv/config"
 
-import { profileRoutes } from "./routes/profileRoutes.js";
+import { profileRoutes } from "./routes/profileRoutes.js"
+import { baselineRoutes } from "./routes/baselineRoutes.js"
 
-const app = express();
+const app = express()
 
-app.use(cors({ origin: "http://localhost:5173" }));
-app.use(express.json());
+app.use(cors({ origin: "http://localhost:5173" }))
+app.use(express.json())
 
 app.get("/health", (req, res) => {
-  res.json({ ok: true });
+  res.json({ ok: true })
 });
 
-app.use("/api/profile", profileRoutes);
+app.use("/api/profile", profileRoutes)
+app.use("/api/baseline", baselineRoutes)
 
 app.listen(process.env.PORT || 3001, () => {
-  console.log(`Server running on http://localhost:${process.env.PORT || 3001}`);
+  console.log(`Server running on http://localhost:${process.env.PORT || 3001}`)
 });
