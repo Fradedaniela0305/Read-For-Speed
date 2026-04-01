@@ -1,7 +1,11 @@
+import { Request, Response, NextFunction } from "express";
 import { supabaseAuth } from "../lib/supabaseAuth.js";
 
-
-async function requireAuth(req, res, next) {
+async function requireAuth(
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void | Response> {
     try {
         const authHeader = req.headers.authorization;
 
@@ -16,14 +20,14 @@ async function requireAuth(req, res, next) {
         const { data, error } = await supabaseAuth.auth.getUser(token);
 
         if (error || !data.user) {
-            return res.status(401).json({error: "Unauthorizes"})
+            return res.status(401).json({ error: "Unauthorized" });
         }
 
         req.user = data.user;
         next();
-    } catch(err) {
-        console.error("Auth middleware error:", err)
-        return res.status(500).json({ error: "Internal server error"})
+    } catch (err) {
+        console.error("Auth middleware error:", err);
+        return res.status(500).json({ error: "Internal server error" });
     }
 }
 

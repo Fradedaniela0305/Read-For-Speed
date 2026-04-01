@@ -303,9 +303,9 @@
 }
 
 .question-card {
-  width: min(900px, 92vw);
+  width: min(900px, 100vw);
   padding: 36px 32px;
-
+  /* min-height: 500px; */
   display: flex;
   flex-direction: column;
   gap: 28px;
@@ -324,6 +324,7 @@
   min-height: 140px;
   padding: 28px 32px;
   box-sizing: border-box;
+  
 
   display: flex;
   justify-content: center;
@@ -354,6 +355,7 @@
 .question-options {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 18px;
 }
 
