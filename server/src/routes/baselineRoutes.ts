@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import requireAuth from "../middleware/requireAuth.js";
 import preventBaselineRetake from "../middleware/preventBaselineRetake.js";
 import { supabaseAdmin } from "../lib/supabaseAdmin.js";
-import { calculateWPM, calculateAccuracy, calculateEffectiveWPM } from "../utils/calculations.js"
+import { calculateWPM, calculateAccuracy, calculateEfficientWPM } from "../utils/calculations.js"
 
 const router = express.Router();
 
@@ -86,15 +86,39 @@ router.get(
 
 router.post("/submit", requireAuth, preventBaselineRetake, async (req: Request<{}, {}, SubmitBaselineBody>, res: Response) => {
     try {
-        const { baselineTestId, correctAnswers, answers, readingTimeSeconds, wordCount} = req.body;
+        const { baselineTestId, correctAnswers, answers, readingTimeSeconds, wordCount } = req.body;
 
-        const wpm : number = calculateWPM(wordCount, readingTimeSeconds);
-        const accuracy : number = calculateAccuracy(correctAnswers, answers);
-        const effectiveWPM : number = calculateEffectiveWPM(wpm, accuracy);
 
-        return res.status(200).json({wpm, accuracy, effectiveWPM});
-        
+        if (!answers || !correctAnswers || !readingTimeSeconds || !wordCount) {
+            return res.status(400).json({ error: "Missing required fields" });
+        }
+
+        const wpm: number = calculateWPM(wordCount, readingTimeSeconds);
+        const accuracy: number = calculateAccuracy(correctAnswers, answers);
+        const efficientWPM: number = calculateEfficientWPM(wpm, accuracy);
+
+        const userId: string = req.user.id;
+
+        const { error: updateError } = await supabaseAdmin
+            .from("profiles")
+            .update({
+                has_completed_baseline: true,
+                wpm: wpm,
+                accuracy: accuracy,
+                efficient_wpm: efficientWPM
+            })
+            .eq("id", userId);
+
+        if (updateError) {
+            return res.status(500).json({ error: updateError.message });
+        }
+
+        return res.status(200).json({ success: true, wpm, accuracy, efficientWPM });
+
+
+
     } catch (err) {
+        console.error(err);
         return res.status(500).json({ error: "Internal server error" });
     }
 });

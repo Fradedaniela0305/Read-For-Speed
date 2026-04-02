@@ -16,7 +16,6 @@ export default function Train() {
         { to: "/drills", label: "Speed Drills", image: mascot_drill },
     ];
 
-
     return (
         <>
             <div className="train-button-container">

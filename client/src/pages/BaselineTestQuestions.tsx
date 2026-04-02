@@ -3,6 +3,7 @@ import { apiRequest } from "../api/client";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import QuestionCard from "../components/QuestionCard";
+import { useProfile } from "../context/ProfileContext";
 
 type BaselineLocationState = {
     baselineTestId?: number | string;
@@ -20,8 +21,7 @@ type Question = {
 };
 
 type SubmitBaselineResponse = {
-    baselineTestId: number;
-    sucess: boolean;
+    success: boolean;
     wpm: number;
     accuracy: number;
     efficientWPM: number;
@@ -51,6 +51,9 @@ export default function BaselineTestQuestions() {
     const answersRef = useRef<string[]>([]);
     const correctAnswersRef = useRef<string[]>([]);
     const [isFinished, setIsFinished] = useState<boolean>(false);
+
+    const { refreshProfile } = useProfile();
+
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
@@ -82,7 +85,7 @@ export default function BaselineTestQuestions() {
         correctAnswersRef.current.push(currentQuestion.correct_answer)
         answersRef.current.push(selectedAnswer);
 
-        const nextIndex : number = currentQuestionIndex + 1;
+        const nextIndex: number = currentQuestionIndex + 1;
 
         if (nextIndex >= questions.length) {
             setIsFinished(true);
@@ -95,7 +98,7 @@ export default function BaselineTestQuestions() {
 
     const handleFinish = async () => {
 
-        const payload : SubmitBaselineRequest = {
+        const payload: SubmitBaselineRequest = {
             baselineTestId,
             correctAnswers: correctAnswersRef.current,
             answers: answersRef.current,
@@ -103,14 +106,22 @@ export default function BaselineTestQuestions() {
             wordCount
         };
 
+
+
+
         try {
-            const result = await apiRequest<SubmitBaselineResponse>(
+            const data = await apiRequest<SubmitBaselineResponse>(
                 "/baseline/submit", {
                 method: "POST",
                 body: JSON.stringify(payload)
-            })
-            console.log(result);
-            navigate("/results", { state: result });
+            });
+
+            console.log(data);
+
+            navigate("/baselineresults", {
+                replace: true,
+                state: data,
+            });
 
         } catch (err) {
             console.error(err)
@@ -120,7 +131,7 @@ export default function BaselineTestQuestions() {
 
 
     if (isFinished) {
-        return <p>Finished!</p>;
+        return <p>Rederecting...</p>;
     }
 
 

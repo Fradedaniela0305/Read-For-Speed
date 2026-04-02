@@ -1,8 +1,4 @@
 
-
-
-
-
 type QuestionButtonProps = {
     option? : string;
     onAnswer? : (selectedAnswer : string) => void;

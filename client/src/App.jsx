@@ -16,6 +16,7 @@ import SignUp from "./pages/SignUp"
 import RequireAuth from "./guards/RequireAuth";
 import RequireBaselineTest from "./guards/RequireBaselineTest";
 import PreventBaseline from "./guards/PreventBaseline";
+import BaselineResults from "./pages/BaselineResults";
 import { ProfileContextProvider } from "./context/ProfileContext";
 
 
@@ -35,6 +36,9 @@ export default function App() {
                                 <Route path="/baselinetest" element={<BaselineTest />} />
                                 <Route path="/baselinetestquestions" element={<BaselineTestQuestions />} />
                             </Route>
+
+
+
                             <Route element={<RequireBaselineTest />} >
                                 <Route element={<MainLayout />}>
                                     <Route path="/train" element={<Train />} />
@@ -51,6 +55,7 @@ export default function App() {
                                 <Route path="/drills" element={<SpeedDrills />} />
                             </Route>
                         </Route>
+                        <Route path="/baselineresults" element={<BaselineResults />} />
                     </Route>
 
                     <Route path="*" element={<div>Page Not Found</div>} />

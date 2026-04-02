@@ -4,6 +4,7 @@ import "dotenv/config";
 
 import { profileRoutes } from "./routes/profileRoutes.js";
 import { baselineRoutes } from "./routes/baselineRoutes.js";
+import { statsRoutes } from "./routes/statsRoutes.js"
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.get("/health", (_req: Request, res: Response) => {
 
 app.use("/api/profile", profileRoutes);
 app.use("/api/baseline", baselineRoutes);
+app.use("/api/stats", statsRoutes);
 
 const port = process.env.PORT ? Number(process.env.PORT) : 3001;
 
