@@ -1,4 +1,5 @@
 import "../styles/stats.css"
+import { useProfile } from "../context/ProfileContext"
 
 type StatsProfileCardProps = {
     wpm: number;
@@ -8,17 +9,23 @@ type StatsProfileCardProps = {
 };
 
 
-export default function StatsProfileCard({ wpm=0, accuracy=0, effectiveSpeed=0, imageSrc="" }: StatsProfileCardProps) {
+export default function StatsProfileCard({ wpm = 0, accuracy = 0, effectiveSpeed = 0, imageSrc = "" }: StatsProfileCardProps) {
+    const { profile, loadingProfile } = useProfile();
 
     return (
         <div className="stats-profile-card">
             <div className="stats-profile-avatar-section">
-                <div className="stats-profile-avatar-frame">
+                {/* <div className="stats-profile-avatar-frame">
                     <img src={imageSrc} alt="Profile avatar" className="stats-profile-avatar" />
-                </div>
+                </div> */}
+                <h1>{profile?.nickname}'s Stats</h1>
             </div>
 
             <div className="stats-profile-metrics">
+                <div className="stats-profile-metric">
+                    <span className="stats-profile-label">Effective WPM: </span>
+                    <span className="stats-profile-value">{effectiveSpeed}</span>
+                </div>
                 <div className="stats-profile-metric">
                     <span className="stats-profile-label">WPM: </span>
                     <span className="stats-profile-value">{wpm}</span>
@@ -29,10 +36,6 @@ export default function StatsProfileCard({ wpm=0, accuracy=0, effectiveSpeed=0, 
                     <span className="stats-profile-value">{Math.round(accuracy * 100)}%</span>
                 </div>
 
-                <div className="stats-profile-metric">
-                    <span className="stats-profile-label">Effective WPM: </span>
-                    <span className="stats-profile-value">{effectiveSpeed}</span>
-                </div>
             </div>
         </div>
     )

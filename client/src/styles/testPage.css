@@ -1,0 +1,219 @@
+.test-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 40px;
+  padding: 48px;
+  box-sizing: border-box;
+  color: var(--text);
+}
+
+.test-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.test-action-group {
+  width: 430px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.take-test-button {
+  width: 100%;
+  min-height: 180px;
+  border: 1px solid var(--accent);
+  border-radius: 26px;
+  background: linear-gradient(to bottom, var(--panel), var(--panel-dark));
+  color: var(--text);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-sizing: border-box;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 18px var(--accent-glow),
+    0 12px 28px rgba(0, 0, 0, 0.35);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    filter 0.22s ease;
+}
+
+.take-test-button:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 24px var(--accent-glow),
+    0 16px 34px rgba(0, 0, 0, 0.42);
+  filter: brightness(1.05);
+  cursor: pointer;
+}
+
+.take-test-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.progress-wrapper {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+.progress-label {
+  margin: 0 0 8px 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--tab-color);
+}
+
+.progress-bar-background {
+  width: 100%;
+  height: 22px;
+  box-sizing: border-box;
+  background: linear-gradient(to bottom, var(--panel), var(--panel-dark));
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--accent);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.65),
+    inset 0 -1px 3px rgba(255, 255, 255, 0.05),
+    0 0 10px var(--accent-glow);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.progress-bar-fill {
+  position: relative;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow:
+    0 0 10px var(--accent-glow),
+    0 0 18px var(--accent-glow),
+    inset 0 1px 3px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+  transition:
+    width 0.45s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
+  overflow: hidden;
+}
+
+.progress-bar-fill::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.28),
+    rgba(255, 255, 255, 0.08) 35%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.progress-bar-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -35%;
+  width: 35%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.45),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: shine 2.8s linear infinite;
+  pointer-events: none;
+}
+
+.progress-bar-background:hover {
+  transform: scale(1.03);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.65),
+    inset 0 -1px 3px rgba(255, 255, 255, 0.05),
+    0 0 16px var(--accent-glow),
+    0 0 26px var(--accent-glow);
+}
+
+.progress-bar-background:hover .progress-bar-fill {
+  transform: scaleY(1.08);
+  filter: brightness(1.08);
+}
+
+.test-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.mascot-placeholder {
+  width: 100%;
+  max-width: 420px;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 28px;
+  border: 1px solid var(--accent);
+  background: linear-gradient(to bottom, var(--panel), var(--panel-dark));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 0 16px var(--accent-glow),
+    0 14px 30px rgba(0, 0, 0, 0.3);
+}
+
+.mascot-placeholder h1 {
+  margin: 0;
+  color: var(--accent);
+  text-shadow:
+    0 0 10px var(--accent-glow),
+    0 0 20px var(--accent-glow);
+}
+
+.test-message {
+  max-width: 420px;
+  text-align: center;
+  line-height: 1.7;
+
+  font-size: 1.3rem; /* ⬅️ bigger */
+  font-weight: 500;
+
+  color: var(--text);
+
+  text-shadow:
+    0 0 10px var(--accent-glow),
+    0 0 20px var(--accent-glow),
+    0 0 40px rgba(255, 255, 255, 0.08);
+}
+.test-message p {
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+@keyframes shine {
+  from {
+    left: -35%;
+  }
+  to {
+    left: 120%;
+  }
+}
+
+

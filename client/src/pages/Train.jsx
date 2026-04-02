@@ -11,7 +11,7 @@ import "../styles/train.css";
 export default function Train() {
 
     const buttons = [
-        { to: "/rsvp", label: "RSVP", image: mascot_rsvp },
+        { to: "/rsvpsetup", label: "RSVP", image: mascot_rsvp },
         { to: "/chunked", label: "Chunked RSVP", image: mascot_chunked },
         { to: "/drills", label: "Speed Drills", image: mascot_drill },
     ];

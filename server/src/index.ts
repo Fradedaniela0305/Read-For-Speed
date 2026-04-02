@@ -5,6 +5,7 @@ import "dotenv/config";
 import { profileRoutes } from "./routes/profileRoutes.js";
 import { baselineRoutes } from "./routes/baselineRoutes.js";
 import { statsRoutes } from "./routes/statsRoutes.js"
+import { rsvpRoutes } from "./routes/rsvpRoutes.js"
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.get("/health", (_req: Request, res: Response) => {
 app.use("/api/profile", profileRoutes);
 app.use("/api/baseline", baselineRoutes);
 app.use("/api/stats", statsRoutes);
+app.use("/api/rsvp", rsvpRoutes)
 
 const port = process.env.PORT ? Number(process.env.PORT) : 3001;
 

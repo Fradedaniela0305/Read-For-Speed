@@ -1,0 +1,101 @@
+/* PAGE */
+.rsvp-setup-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 24px;
+  box-sizing: border-box;
+}
+
+/* CARD */
+.rsvp-setup-card {
+  width: min(900px, 95vw);
+  padding: 40px 36px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  background: linear-gradient(to bottom, var(--panel), var(--panel-dark));
+  border: 1px solid var(--accent);
+  border-radius: 16px;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.03),
+    0 16px 40px rgba(0,0,0,0.6);
+}
+
+/* TITLE */
+.rsvp-setup-title {
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+/* SUBTITLE */
+.rsvp-setup-subtitle {
+  opacity: 0.7;
+  font-size: 0.95rem;
+}
+
+/* TEXTAREA */
+.rsvp-textarea {
+  width: 100%;
+  min-height: 260px;
+  resize: vertical;
+
+  padding: 18px 20px;
+  box-sizing: border-box;
+
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+
+  background: rgba(0,0,0,0.35);
+  color: var(--text);
+
+  font-size: 1rem;
+  line-height: 1.6;
+
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+/* TEXTAREA FOCUS ✨ */
+.rsvp-textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+/* START BUTTON */
+.rsvp-start-button {
+  margin-top: 10px;
+  align-self: flex-end;
+
+  padding: 14px 28px;
+
+  border-radius: 12px;
+  border: 1px solid var(--accent);
+
+  background: var(--panel);
+  color: var(--text);
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+/* HOVER EFFECT */
+.rsvp-start-button:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 12px rgba(255,255,255,0.08);
+}
+
+/* DISABLED STATE */
+.rsvp-start-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
