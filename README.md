@@ -123,7 +123,7 @@ This is why effective WPM is the core metric.
 
 ### Data Flow & State Management
 
-Handling timed reading sessions, navigation between test → questions → results, and syncing frontend state with backend required careful structure across React and API boundaries.
+Handling timed reading sessions, navigation between test -> questions -> results, and syncing frontend state with backend required careful structure across React and API boundaries.
 
 ---
 
@@ -134,19 +134,6 @@ Handling timed reading sessions, navigation between test → questions → resul
 - Database updates tied to user actions  
 
 ---
-
-## Why This Project
-
-This project started as a simple idea:
-
-“What if I could train reading speed like a skill?”
-
-It quickly turned into a full system involving real-time interaction, metrics design, backend architecture, and user progression logic.
-
-At this stage, it feels less like a single app and more like a growing ecosystem.
-
----
-
 ## Future Vision
 
 The goal is to evolve this into:
@@ -157,8 +144,4 @@ The goal is to evolve this into:
 
 ---
 
-## Final Note
 
-Read. For Speed. is not finished — it is actively becoming the thing it was meant to be.
-
-And that is the most interesting part.
