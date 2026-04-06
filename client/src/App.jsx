@@ -19,6 +19,7 @@ import PreventBaseline from "./guards/PreventBaseline";
 import BaselineResults from "./pages/BaselineResults";
 import { ProfileContextProvider } from "./context/ProfileContext";
 import RSVPsetup from "./pages/RSVPsetup"
+import RSVPResult from "./pages/RSVPResult";
 
 
 export default function App() {
@@ -49,6 +50,7 @@ export default function App() {
 
                                 <Route path="/rsvpsetup" element={<RSVPsetup />} />
                                 <Route path="/rsvp/read" element={<RSVP />} />
+                                <Route path="rsvp/result" element={<RSVPResult />} />
 
 
                                 <Route path="/chunked" element={<ChunkedRSVP />} />

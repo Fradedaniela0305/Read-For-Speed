@@ -7,7 +7,7 @@ export default function RequireAuth() {
   if ( session === undefined) {
     return (
         <div>
-            Loading...
+            RequireAuth
         </div>
     )
   }

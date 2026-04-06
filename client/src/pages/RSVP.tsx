@@ -3,27 +3,36 @@ import { Navigate, useLocation } from "react-router-dom";
 import { RSVPReaderState } from "../types/RSVP"
 import { useProfile } from "../context/ProfileContext";
 import { apiRequest } from "../api/client";
+import { useNavigate } from "react-router-dom";
 
 
 type RSVPResultRequest = {
     wpm: number;
     wordCount: number;
+    completed_at: string;
 };
 
 type RSVPResultResponse = {
-    success: boolean;
+    success: string;
 };
 
 export default function RSVP() {
 
-    const location = useLocation();
-    const state = location.state as RSVPReaderState | null;
+
     const { profile, loadingProfile } = useProfile();
 
-    const [currentWordIndex, setCurrentWordIndex] = useState(0);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [wpm, setWpm] = useState(200);
-    const startTimeRef = useRef<number | null>(null);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const state = location.state as RSVPReaderState | null;
+
+    const passageText =
+        state?.passageText || localStorage.getItem("rsvpText") || "";
+
+
+
+    const [currentWordIndex, setCurrentWordIndex] = useState<number>(0);
+    const [isPlaying, setIsPlaying] = useState<boolean>(false);
+    const [wpm, setWpm] = useState<number>(1000);
 
     const [isFinished, setIsFinished] = useState(false);
     const intervalRef = useRef<number | null>(null);
@@ -32,25 +41,22 @@ export default function RSVP() {
         return <Navigate to="/rsvp" replace />;
     }
 
-    const passageText = state.passageText;
+
     const words = passageText.trim().split(/\s+/);
     const msPerWord = 60000 / wpm;
-
 
 
     const saveResults = async (): Promise<void> => {
 
         const payload: RSVPResultRequest = {
             wpm: wpm,
-            wordCount: words.length
+            wordCount: words.length,
+            completed_at: new Date().toISOString()
         }
 
         await apiRequest<RSVPResultResponse>("/rsvp/results", {
             method: "POST",
-            body: JSON.stringify({
-                wpm,
-                wordCount: words.length,
-            }),
+            body: JSON.stringify(payload),
         });
     }
 
@@ -67,6 +73,25 @@ export default function RSVP() {
         if (words.length >= 100) {
             await saveResults();
         }
+
+
+    };
+
+    const handleExit = () => {
+        if (intervalRef.current !== null) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+        }
+
+        setIsPlaying(false);
+        setIsFinished(false);
+        setCurrentWordIndex(0);
+        localStorage.removeItem("rsvpText");
+        localStorage.removeItem("rsvpCurrentWordIndex");
+
+        setIsPlaying(false);
+
+        navigate("/train");
     };
 
 
@@ -94,14 +119,39 @@ export default function RSVP() {
         }
     }, [currentWordIndex, words.length, isPlaying]);
 
-
     return (
-        <div>
-            <h1>{words[currentWordIndex]}</h1>
-            <button onClick={() => { setIsPlaying(true) }}>START </button>
-            <button onClick={() => { setIsPlaying(false) }}> Pause </button>
+        <div className="rsvp-page">
+            <div className="rsvp-word-panel">
+                <span className="rsvp-word">
+                    {words[currentWordIndex]}
+                </span>
+            </div>
+
+            <div className="rsvp-bottom-bar">
+                <button className="rsvp-exit-button" onClick={handleExit}>
+                    Exit
+                </button>
+
+                <div className="rsvp-controls">
+                    <button onClick={() => setIsPlaying(true)} disabled={isFinished}>Start</button>
+                    <button onClick={() => setIsPlaying(false)} disabled={isFinished}>Pause</button>
+                    <button
+                        onClick={() =>
+                            navigate("/rsvp/result", {
+                                state: {
+                                    wpm,
+                                    wordCount: words.length,
+                                },
+                            })
+                        }
+                        disabled={!isFinished}
+                    >
+                        Continue
+                    </button>
+
+                </div>
+            </div>
         </div>
     );
-
 
 }
