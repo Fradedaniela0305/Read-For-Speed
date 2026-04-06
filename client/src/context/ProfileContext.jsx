@@ -38,18 +38,21 @@ export function ProfileContextProvider() {
 
     const refreshProfile = async () => {
         if (!session) {
-            return
+            setProfile(null);
+            setLoadingProfile(false);
+            return;
         }
-
-        let data = null
 
         try {
-            data = await apiRequest("/profile/me")
-            setProfile(data)
+            setLoadingProfile(true);
+            const data = await apiRequest("/profile/me");
+            setProfile(data);
         } catch (err) {
-            console.error(err)
+            console.error(err);
+        } finally {
+            setLoadingProfile(false);
         }
-    }
+    };
 
     return (
         <ProfileContext.Provider value={{ profile, setProfile, refreshProfile, loadingProfile }} >

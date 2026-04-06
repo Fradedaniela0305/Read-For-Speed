@@ -1,7 +1,15 @@
 import QuestionButton from "./QuestionButton"
-import "../styles/baselineTest.css"
+import "../styles/test.css"
 
-export default function QuestionCard({ question_text = "the question", options = ["a", "b", "c", "d"], answer = "a" }) {
+
+type QuestionCardProps = {
+    question_text? : string;
+    options? : string[];
+    isLocked : boolean
+    onAnswer? : (selectedAnswer : string) => void;
+}
+
+export default function QuestionCard({ question_text = "the question", options = ["a", "b", "c", "d"], isLocked=false, onAnswer = (selectedAnswer : string) => {} } : QuestionCardProps) {
     return (
         <div className="question-card-wrapper">
             <div className="question-card">
@@ -11,7 +19,7 @@ export default function QuestionCard({ question_text = "the question", options =
 
                 <div className="question-options">
                     {options.map((option, index) => (
-                        <QuestionButton key={index} option={option} />
+                        <QuestionButton key={index} option={option} isLocked={isLocked} onAnswer={onAnswer} />
                     ))}
                 </div>
             </div>

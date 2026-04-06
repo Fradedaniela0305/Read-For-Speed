@@ -16,7 +16,9 @@ import SignUp from "./pages/SignUp"
 import RequireAuth from "./guards/RequireAuth";
 import RequireBaselineTest from "./guards/RequireBaselineTest";
 import PreventBaseline from "./guards/PreventBaseline";
+import BaselineResults from "./pages/BaselineResults";
 import { ProfileContextProvider } from "./context/ProfileContext";
+import RSVPsetup from "./pages/RSVPsetup"
 
 
 export default function App() {
@@ -35,6 +37,7 @@ export default function App() {
                                 <Route path="/baselinetest" element={<BaselineTest />} />
                                 <Route path="/baselinetestquestions" element={<BaselineTestQuestions />} />
                             </Route>
+
                             <Route element={<RequireBaselineTest />} >
                                 <Route element={<MainLayout />}>
                                     <Route path="/train" element={<Train />} />
@@ -44,13 +47,15 @@ export default function App() {
                                     <Route path="/settheme" element={<SetTheme theme={theme} setTheme={setTheme} />} />
                                 </Route>
 
+                                <Route path="/rsvpsetup" element={<RSVPsetup />} />
+                                <Route path="/rsvp/read" element={<RSVP />} />
 
 
-                                <Route path="/rsvp" element={<RSVP />} />
                                 <Route path="/chunked" element={<ChunkedRSVP />} />
                                 <Route path="/drills" element={<SpeedDrills />} />
                             </Route>
                         </Route>
+                        <Route path="/baselineresults" element={<BaselineResults />} />
                     </Route>
 
                     <Route path="*" element={<div>Page Not Found</div>} />
