@@ -28,7 +28,7 @@ export default function BaselineResults() {
     return (
         <div className="baseline-results-wrapper">
             <div className="baseline-results-card">
-                <h1 className="baseline-title">✨ Baseline Complete ✨</h1>
+                <h1 className="baseline-title">Baseline Complete</h1>
                 <p className="baseline-subtitle">
                     Here’s how you performed:
                 </p>

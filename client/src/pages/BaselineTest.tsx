@@ -3,6 +3,7 @@ import "../styles/test.css"
 import { useState, useEffect } from "react";
 import { apiRequest } from "../api/client";
 import { useNavigate } from "react-router-dom";
+import scrollImg from "../assets/scroll.png";
 
 type TestStatus = "idle" | "running" | "finished";
 
@@ -112,9 +113,7 @@ export default function BaselineTest() {
             <div className="baseline-scroll-stage">
                 {testStatus === "idle" && (
                     <div className="scroll-shell">
-                        <div className="scroll-image-placeholder">
-                            <span>Scroll Image Placeholder</span>
-                        </div>
+
 
                         <div className="scroll-text-window scroll-text-window-idle">
                             <p className="scroll-placeholder-text">
@@ -126,10 +125,6 @@ export default function BaselineTest() {
 
                 {testStatus === "running" && (
                     <div className="scroll-shell">
-                        <div className="scroll-image-placeholder">
-                            <span>Scroll Image Placeholder</span>
-                        </div>
-
                         <div className="scroll-text-window">
                             <p className="scroll-reading-text">{baselineText}</p>
                         </div>
