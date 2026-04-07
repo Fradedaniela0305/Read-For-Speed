@@ -9,7 +9,13 @@ import { rsvpRoutes } from "./routes/rsvpRoutes.js"
 
 const app = express();
 
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://read-for-speed-qi6bqtvnu-danis-projects-2f94e641.vercel.app"
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 app.get("/health", (_req: Request, res: Response) => {
