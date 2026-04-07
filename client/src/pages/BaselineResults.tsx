@@ -47,7 +47,7 @@ export default function BaselineResults() {
                     </div>
 
                     <div className="stat-box">
-                        <span className="stat-label">Effective</span>
+                        <span className="stat-label">Effective WPM</span>
                         <span className="stat-value">{efficientWPM}</span>
                     </div>
                 </div>

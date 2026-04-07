@@ -19,25 +19,22 @@ router.post("/results", requireAuth, requireBaseline, async (req: Request, res: 
             return res.status(400).json({ error: "Missing required fields" });
         }
 
-        const { error } = await supabaseAdmin.from("training_attempts").insert({
-            user_id: userId,
-            training_type: "rsvp",
-            wpm,
-            word_count: wordCount,
-            completed_at: completed_at
-        });
+        const { error } = await supabaseAdmin.rpc(
+            "insert_training_attempt_and_update_profile",
+            {
+                p_user_id: userId,
+                p_training_type: "rsvp",
+                p_wpm: wpm,
+                p_word_count: wordCount,
+                p_completed_at: completed_at,
+            }
+        );
 
         if (error) {
-            console.error("SUPABASE ERROR:", error); 
-            return res.status(500).json({
-                error: error.message,
-                details: error.details,
-                hint: error.hint,
-                code: error.code,
-            });
+            console.error(error);
+            return res.status(500).json({error: "Internal Server Error"})
         }
 
-        
 
         return res.status(201).json({
             message: "RSVP results saved successfully",
