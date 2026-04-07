@@ -32,7 +32,7 @@ export default function RSVP() {
 
     const [currentWordIndex, setCurrentWordIndex] = useState<number>(0);
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
-    const [wpm, setWpm] = useState<number>(1000);
+    const [wpm, setWpm] = useState<number>(profile?.efficient_wpm);
 
     const [isFinished, setIsFinished] = useState(false);
     const intervalRef = useRef<number | null>(null);
