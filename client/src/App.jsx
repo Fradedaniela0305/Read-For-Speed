@@ -1,25 +1,34 @@
 import { useEffect, useMemo, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+
 import Train from "./pages/Train";
 import RSVP from "./pages/RSVP";
 import ChunkedRSVP from "./pages/ChunkedRSVP";
 import SpeedDrills from "./pages/SpeedDrills";
+
 import BaselineTest from "./pages/BaselineTest"
-import BaselineTestQuestions from "./pages/BaselineTestQuestions";
-import Test from "./pages/Test";
+import BaselineTestQuestions from "./pages/BaselineTestQuestions"
+
+import TestTab from "./pages/TestTab";
+
+import ProgressTest from "./pages/ProgressTest"
+import ProgressTestQuestions from "./pages/ProgressTestQuestions"
+
+import MainLayout from "./layouts/MainLayout";
 import Stats from "./pages/Stats";
 import Profile from "./pages/Profile";
-import MainLayout from "./layouts/MainLayout";
 import SetTheme from "./pages/SetTheme"
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp"
 import RequireAuth from "./guards/RequireAuth";
 import RequireBaselineTest from "./guards/RequireBaselineTest";
 import PreventBaseline from "./guards/PreventBaseline";
-import BaselineResults from "./pages/BaselineResults";
+
+
 import { ProfileContextProvider } from "./context/ProfileContext";
 import RSVPsetup from "./pages/RSVPsetup"
 import RSVPResult from "./pages/RSVPResult";
+
 
 
 export default function App() {
@@ -36,17 +45,17 @@ export default function App() {
                         <Route element={<ProfileContextProvider />}>
                             <Route element={<PreventBaseline />} >
                                 <Route path="/baselinetest" element={<BaselineTest />} />
-                                <Route path="/baselinetestquestions" element={<BaselineTestQuestions />} />
                             </Route>
 
                             <Route element={<RequireBaselineTest />} >
                                 <Route element={<MainLayout />}>
                                     <Route path="/train" element={<Train />} />
-                                    <Route path="/test" element={<Test />} />
+                                    <Route path="/test" element={<TestTab />} />
                                     <Route path="/stats" element={<Stats />} />
                                     <Route path="/profile" element={<Profile theme={theme} setTheme={setTheme} />} />
                                     <Route path="/settheme" element={<SetTheme theme={theme} setTheme={setTheme} />} />
                                 </Route>
+
 
                                 <Route path="/rsvpsetup" element={<RSVPsetup />} />
                                 <Route path="/rsvp/read" element={<RSVP />} />
@@ -55,9 +64,15 @@ export default function App() {
 
                                 <Route path="/chunked" element={<ChunkedRSVP />} />
                                 <Route path="/drills" element={<SpeedDrills />} />
+
+
+
+                                <Route path="/progresstest" element={<ProgressTest />} />
+                                <Route path="/progresstest/questions" element={<ProgressTestQuestions />} />
+
                             </Route>
+                            <Route path="/baselinetest/questions" element={<BaselineTestQuestions />} />
                         </Route>
-                        <Route path="/baselineresults" element={<BaselineResults />} />
                     </Route>
 
                     <Route path="*" element={<div>Page Not Found</div>} />

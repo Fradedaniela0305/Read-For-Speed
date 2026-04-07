@@ -1,16 +1,22 @@
 import ProgressBar from "../components/ProgessBar";
 import { useProfile } from "../context/ProfileContext";
 import "../styles/testPage.css";
+import { useNavigate } from "react-router-dom"
 
-export default function Test() {
+import { REQUIRED_SESSIONS_FOR_TEST, canUserTakeTest } from "../../../shared/testElegibility";
+
+
+export default function TestTab() {
     const { profile, loadingProfile } = useProfile();
 
-    const REQUIRED_SESSIONS = 5;
+    const navigate = useNavigate();
+
     const numberOfTrainsTaken = profile?.completed_session_count ?? 0;
-    const canTakeTest = numberOfTrainsTaken >= REQUIRED_SESSIONS;
+
+    const canTakeTest = canUserTakeTest(numberOfTrainsTaken);
 
     const remainingSessions = Math.max(
-        REQUIRED_SESSIONS - numberOfTrainsTaken,
+        REQUIRED_SESSIONS_FOR_TEST - numberOfTrainsTaken,
         0
     );
 
@@ -18,17 +24,21 @@ export default function Test() {
         return <p>Loading...</p>;
     }
 
+
+
     return (
         <div className="test-page">
             <div className="test-left">
                 <div className="test-action-group">
-                    <button className="take-test-button" disabled={!canTakeTest}>
+
+                    
+                    <button className="take-test-button" disabled={!canTakeTest} onClick={() => {navigate("/progresstest")}}>
                         Take Test
                     </button>
 
                     <ProgressBar
                         completedSessions={numberOfTrainsTaken}
-                        requiredSessions={REQUIRED_SESSIONS}
+                        requiredSessions={REQUIRED_SESSIONS_FOR_TEST}
                     />
                 </div>
             </div>

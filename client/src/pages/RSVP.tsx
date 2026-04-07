@@ -19,7 +19,7 @@ type RSVPResultResponse = {
 export default function RSVP() {
 
 
-    const { profile, loadingProfile } = useProfile();
+    const { profile, loadingProfile, refreshProfile } = useProfile();
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -58,6 +58,9 @@ export default function RSVP() {
             method: "POST",
             body: JSON.stringify(payload),
         });
+
+        refreshProfile();
+
     }
 
 
