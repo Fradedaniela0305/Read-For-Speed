@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { TestLocationState } from "../types/tests";
-import TestQuestions from "./TestQuestions";
+import TestQuestions from "./ReadingTestQuestions";
 import ProgressTestOutro from "../components/ProgressTestOutro";
 
 export default function ProgressTestQuestions() {
@@ -16,6 +16,7 @@ export default function ProgressTestQuestions() {
       testId={progressTestId}
       readingTimeSeconds={readingTimeSeconds}
       wordCount={wordCount}
+      fetchQuestionsEndpoint={"/progress/questions"}
       submitEndpoint="/progress/submit"
       OutroComponent={ProgressTestOutro}
     />

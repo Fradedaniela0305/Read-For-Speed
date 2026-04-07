@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import requireAuth from "../middleware/requireAuth.js";
 import preventBaselineRetake from "../middleware/preventBaselineRetake.js";
 import { supabaseAdmin } from "../lib/supabaseAdmin.js";
-import { calculateWPM, calculateAccuracy, calculateEfficientWPM } from "../utils/calculations.js"
+import { calculateWPM, calculateAccuracy, calculateEffectiveWPM } from "../utils/calculations.js"
 
 const router = express.Router();
 
@@ -84,43 +84,66 @@ router.get(
 
 // Request<Params, ResBody, ReqBody, Query>
 
-router.post("/submit", requireAuth, preventBaselineRetake, async (req: Request<{}, {}, SubmitBaselineBody>, res: Response) => {
-    try {
-        const { baselineTestId, correctAnswers, answers, readingTimeSeconds, wordCount } = req.body;
 
+router.post(
+    "/submit",
+    requireAuth,
+    preventBaselineRetake,
+    async (req: Request<{}, {}, SubmitBaselineBody>, res: Response) => {
+        try {
+            const {
+                baselineTestId,
+                correctAnswers,
+                answers,
+                readingTimeSeconds,
+                wordCount,
+            } = req.body;
 
-        if (!answers || !correctAnswers || !readingTimeSeconds || !wordCount) {
-            return res.status(400).json({ error: "Missing required fields" });
+            if (
+                baselineTestId == null ||
+                !Array.isArray(correctAnswers) ||
+                !Array.isArray(answers) ||
+                correctAnswers.length === 0 ||
+                answers.length === 0 ||
+                correctAnswers.length !== answers.length ||
+                typeof readingTimeSeconds !== "number" ||
+                typeof wordCount !== "number" ||
+                readingTimeSeconds <= 0 ||
+                wordCount <= 0
+            ) {
+                return res.status(400).json({ error: "Invalid submission data" });
+            }
+
+            const wpm = calculateWPM(wordCount, readingTimeSeconds);
+            const accuracy = calculateAccuracy(correctAnswers, answers);
+            const effectiveWPM = calculateEffectiveWPM(wpm, accuracy);
+
+            const userId = req.user.id;
+
+            const { error } = await supabaseAdmin.rpc("submit_baseline_attempt", {
+                p_user_id: userId,
+                p_baseline_test_id: baselineTestId,
+                p_reading_time_seconds: readingTimeSeconds,
+                p_wpm: wpm,
+                p_accuracy: accuracy,
+                p_effective_wpm: effectiveWPM,
+            });
+
+            if (error) {
+                return res.status(500).json({ error: error.message });
+            }
+
+            return res.status(200).json({
+                success: true,
+                wpm,
+                accuracy,
+                effectiveWPM,
+            });
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({ error: "Internal server error" });
         }
-
-        const wpm: number = calculateWPM(wordCount, readingTimeSeconds);
-        const accuracy: number = calculateAccuracy(correctAnswers, answers);
-        const efficientWPM: number = calculateEfficientWPM(wpm, accuracy);
-
-        const userId: string = req.user.id;
-
-        const { error: updateError } = await supabaseAdmin
-            .from("profiles")
-            .update({
-                has_completed_baseline: true,
-                wpm: wpm,
-                accuracy: accuracy,
-                efficient_wpm: efficientWPM
-            })
-            .eq("id", userId);
-
-        if (updateError) {
-            return res.status(500).json({ error: updateError.message });
-        }
-
-        return res.status(200).json({ success: true, wpm, accuracy, efficientWPM });
-
-
-
-    } catch (err) {
-        console.error(err);
-        return res.status(500).json({ error: "Internal server error" });
     }
-});
+);
 
 export { router as baselineRoutes };

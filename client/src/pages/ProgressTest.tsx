@@ -24,7 +24,7 @@ export default function ProgressTest() {
     return (
         <ReadingTest
             IntroComponent={ProgressTestIntro}
-            fetchEndpoint={"/progress/test"}
+            fetchEndpoint={"/progress/fetch"}
             navigateTo={"/progresstest/questions"}
         />
     )

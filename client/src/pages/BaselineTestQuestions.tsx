@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { TestLocationState } from "../types/tests";
-import TestQuestions from "./TestQuestions";
+import TestQuestions from "./ReadingTestQuestions";
 import BaselineTestOutro from "../components/BaselineTestOutro";
 
 export default function BaselineTestQuestions() {
@@ -16,6 +16,7 @@ export default function BaselineTestQuestions() {
       testId={baselineTestId}
       readingTimeSeconds={readingTimeSeconds}
       wordCount={wordCount}
+      fetchQuestionsEndpoint={"/baseline/questions"}
       submitEndpoint="/baseline/submit"
       OutroComponent={BaselineTestOutro}
     />

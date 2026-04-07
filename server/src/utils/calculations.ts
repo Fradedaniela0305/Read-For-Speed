@@ -20,7 +20,7 @@ export function calculateAccuracy(correctAnswers: string[], userAnswers: string[
   return score / correctAnswers.length;
 }
 
-export function calculateEfficientWPM(wpm: number, accuracy: number): number {
+export function calculateEffectiveWPM(wpm: number, accuracy: number): number {
   if (accuracy >= 0.85) return Math.round(wpm);
   if (accuracy >= 0.7) return Math.round(wpm * 0.9);
   if (accuracy >= 0.5) return Math.round(wpm * 0.8);

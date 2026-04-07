@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   calculateWPM,
   calculateAccuracy,
-  calculateEfficientWPM,
+  calculateEffectiveWPM,
 } from "./calculations.js";
 
 describe("calculateAccuracy", () => {
@@ -85,28 +85,28 @@ describe("calculateWPM", () => {
   });
 });
 
-describe("calculateEfficientWPM", () => {
+describe("calculateEffectiveWPM", () => {
   it("keeps full wpm for accuracy >= 0.85", () => {
-    expect(calculateEfficientWPM(250, 0.9)).toBe(250);
-    expect(calculateEfficientWPM(250, 0.85)).toBe(250);
+    expect(calculateEffectiveWPM(250, 0.9)).toBe(250);
+    expect(calculateEffectiveWPM(250, 0.85)).toBe(250);
   });
 
   it("applies 0.9 multiplier for accuracy between 0.7 and 0.849...", () => {
-    expect(calculateEfficientWPM(250, 0.75)).toBe(225);
-    expect(calculateEfficientWPM(250, 0.7)).toBe(225);
+    expect(calculateEffectiveWPM(250, 0.75)).toBe(225);
+    expect(calculateEffectiveWPM(250, 0.7)).toBe(225);
   });
 
   it("applies 0.8 multiplier for accuracy between 0.5 and 0.699...", () => {
-    expect(calculateEfficientWPM(250, 0.6)).toBe(200);
-    expect(calculateEfficientWPM(250, 0.5)).toBe(200);
+    expect(calculateEffectiveWPM(250, 0.6)).toBe(200);
+    expect(calculateEffectiveWPM(250, 0.5)).toBe(200);
   });
 
   it("applies 0.7 multiplier for accuracy below 0.5", () => {
-    expect(calculateEfficientWPM(250, 0.4)).toBe(175);
-    expect(calculateEfficientWPM(250, 0.49)).toBe(175);
+    expect(calculateEffectiveWPM(250, 0.4)).toBe(175);
+    expect(calculateEffectiveWPM(250, 0.49)).toBe(175);
   });
 
   it("rounds result to nearest integer", () => {
-    expect(calculateEfficientWPM(333, 0.75)).toBe(300); 
+    expect(calculateEffectiveWPM(333, 0.75)).toBe(300); 
   });
 });
