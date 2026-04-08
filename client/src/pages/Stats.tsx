@@ -13,8 +13,6 @@ type HeatmapStatsResponse = {
 export default function Stats() {
 
 
-
-
     const { profile, loadingProfile } = useProfile();
     const [heatmapStats, setHeatmapStats] = useState<HeatmapStats[]>(null);
 
@@ -45,9 +43,9 @@ export default function Stats() {
         <div className="stats-page">
             <div className="stats-left">
                 <StatsProfileCard
-                    wpm={profile?.wpm}
-                    accuracy={profile?.accuracy}
-                    effectiveSpeed={profile?.efficient_wpm}
+                    wpm={profile?.current_wpm}
+                    accuracy={profile?.current_accuracy}
+                    effectiveSpeed={profile?.current_effective_wpm}
                     imageSrc={profile?.avatar_url}
                 />
             </div>

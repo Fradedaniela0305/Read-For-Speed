@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import requireAuth from "../middleware/requireAuth.js";
 import requireBaseline from "../middleware/requireBaseline.js";
 import { supabaseAdmin } from "../lib/supabaseAdmin.js";
-
+import preventTestTake from "../middleware/preventTestTake.js"
 
 
 const router = express.Router();
@@ -13,7 +13,7 @@ const router = express.Router();
 
 
 
-
+router.get("/fetch", requireAuth, requireBaseline, preventTestTake, )
 
 
 export { router as progressRoutes }
