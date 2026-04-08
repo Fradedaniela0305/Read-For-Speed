@@ -8,12 +8,21 @@ import requireTrainingElegibility from "../middleware/requireTrainingElegibility
 const router = express.Router();
 
 
+router.get("/fetch", requireAuth, requireBaseline, requireTrainingElegibility, async(req : Request, res : Response) => {
 
 
 
+});
 
+router.get("./questions", requireAuth, requireBaseline, requireTrainingElegibility, async(req : Request, res : Response) =>  {
 
-router.get("/fetch", requireAuth, requireBaseline, requireTrainingElegibility, )
+});
+
+router.post("./submit", requireAuth, requireBaseline, requireTrainingElegibility , async(req : Request, res : Response) =>  {
+
+    
+});
+
 
 
 export { router as progressRoutes }

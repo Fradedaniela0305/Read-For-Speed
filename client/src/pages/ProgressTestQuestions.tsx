@@ -17,7 +17,7 @@ export default function ProgressTestQuestions() {
       readingTimeSeconds={readingTimeSeconds}
       wordCount={wordCount}
       fetchQuestionsEndpoint={"/progress/questions/"}
-      submitEndpoint="/progress/submit"
+      submitEndpoint={"/progress/submit"}
       OutroComponent={ProgressTestOutro}
     />
   );
