@@ -10,8 +10,6 @@ const router = express.Router();
 
 router.get("/fetch", requireAuth, requireBaseline, requireTrainingElegibility, async(req : Request, res : Response) => {
 
-
-
 });
 
 router.get("./questions", requireAuth, requireBaseline, requireTrainingElegibility, async(req : Request, res : Response) =>  {
@@ -20,7 +18,6 @@ router.get("./questions", requireAuth, requireBaseline, requireTrainingElegibili
 
 router.post("./submit", requireAuth, requireBaseline, requireTrainingElegibility , async(req : Request, res : Response) =>  {
 
-    
 });
 
 
