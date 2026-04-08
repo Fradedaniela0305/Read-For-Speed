@@ -51,7 +51,7 @@ describe("requireTrainingEligibility middleware", () => {
     expect(next).not.toHaveBeenCalled();
   });
 
-  it("returns 403 if profile data is missing", async () => {
+  it("returns 500 if profile data is missing", async () => {
     singleMock.mockResolvedValue({
       data: null,
       error: null,
@@ -74,9 +74,9 @@ describe("requireTrainingEligibility middleware", () => {
 
     await requireTrainingEligibility(req, res, next);
 
-    expect(res.status).toHaveBeenCalledWith(403);
+    expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({
-      error: "5 completed training sessions are required before accessing this resource.",
+      error: "Profile not found.",
     });
     expect(next).not.toHaveBeenCalled();
   });

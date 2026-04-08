@@ -13,7 +13,7 @@ const router = express.Router();
 
 
 
-router.get("/fetch", requireAuth, requireBaseline, preventTestTake, )
+router.get("/fetch", requireAuth, requireBaseline, requireTrainingElegibility, )
 
 
 export { router as progressRoutes }

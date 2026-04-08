@@ -3,7 +3,7 @@ import { useProfile } from "../context/ProfileContext";
 import "../styles/testPage.css";
 import { useNavigate } from "react-router-dom"
 
-import { REQUIRED_SESSIONS_FOR_TEST, canUserTakeTest } from "../../../shared/testElegibility";
+import { REQUIRED_SESSIONS_FOR_TEST, canUserTakeTest } from "../shared/testElegibility";;
 
 
 export default function TestTab() {

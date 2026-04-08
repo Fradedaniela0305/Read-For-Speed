@@ -1,5 +1,5 @@
 import { useProfile } from "../context/ProfileContext";
-import { REQUIRED_SESSIONS_FOR_TEST, canUserTakeTest } from "../../../shared/testElegibility";
+import { REQUIRED_SESSIONS_FOR_TEST, canUserTakeTest } from "../shared/testElegibility";
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState, useRef } from "react";
 import { apiRequest } from "src/api/client";
