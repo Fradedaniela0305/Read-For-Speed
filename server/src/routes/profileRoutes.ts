@@ -44,4 +44,8 @@ router.get("/me", requireAuth, async (req: Request, res: Response) => {
     }
 });
 
+router.post("/me/update", requireAuth, async (req: Request, res: Response) => {
+
+});
+
 export { router as profileRoutes };

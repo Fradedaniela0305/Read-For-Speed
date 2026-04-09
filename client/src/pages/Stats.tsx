@@ -33,9 +33,6 @@ export default function Stats() {
     }, []);
 
 
-    if (!heatmapStats) {
-        return<h1>Loading...</h1>
-    }
 
 
     return (

@@ -4,7 +4,7 @@ type SubmitTestResponse = {
   success: boolean;
   wpm: number;
   accuracy: number;
-  efficientWPM: number;
+  effectiveWPM: number;
 };
 
 type ProgressTestOutroProps = {
@@ -14,7 +14,7 @@ type ProgressTestOutroProps = {
 export default function ProgressTestOutro({ data }: ProgressTestOutroProps) {
   const navigate = useNavigate();
 
-  const { success, wpm, accuracy, efficientWPM } = data;
+  const { success, wpm, accuracy, effectiveWPM } = data;
 
   if (!success) {
     return <h1>Something went wrong</h1>;
@@ -26,7 +26,7 @@ export default function ProgressTestOutro({ data }: ProgressTestOutroProps) {
 
       <p>WPM: {wpm}</p>
       <p>Accuracy: {Math.round(accuracy * 100)}%</p>
-      <p>Effective WPM: {efficientWPM}</p>
+      <p>Effective WPM: {effectiveWPM}</p>
 
       <button onClick={() => navigate("/train")}>
         Continue Training →
