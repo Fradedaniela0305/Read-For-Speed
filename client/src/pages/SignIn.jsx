@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useAuth } from "../context/AuthContext"
 import { useNavigate } from "react-router-dom"
 import "../styles/auth.css";
+import { supabase } from "../lib/supabase";
 
 export default function SignIn() {
     const [email, setEmail] = useState('')
@@ -34,11 +35,15 @@ export default function SignIn() {
         }
     }
 
+    const handleForgotPassword = async () => {
+        navigate("/signin/forgot-password");
+    };
+
     return (
         <div className="auth-container">
             <form onSubmit={handleSignIn} className="auth-panel">
 
-                <h2 className="auth-title">Welcome back</h2>
+                <h2 className="auth-title">Welcome back to <br /> <span className="auth-title-glow"> Read. For Speed </span></h2>
 
                 <p className="auth-subtext">
                     Don't have an account?
@@ -66,6 +71,16 @@ export default function SignIn() {
                 <button className="auth-button" disabled={loading}>
                     {loading ? "Signing in..." : "Sign in"}
                 </button>
+
+                <p className="auth-forgot">
+                    <button
+                        type="button"
+                        className="auth-forgot-button"
+                        onClick={handleForgotPassword}
+                    >
+                        Forgot password?
+                    </button>
+                </p>
 
                 {error && <p className="auth-error">{error}</p>}
 

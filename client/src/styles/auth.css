@@ -108,3 +108,44 @@
   font-size: 14px;
   color: #ff6b6b;
 }
+
+
+.auth-title-glow {
+  font-size: 44px; /* bigger */
+  font-weight: 600;
+  letter-spacing: 2px;
+
+  color: var(--tab-hover);
+
+}
+
+
+.auth-forgot {
+  text-align: center;
+  margin: -6px 0 6px 0;
+}
+
+.auth-forgot-button {
+  background: none;
+  border: none;
+  color: var(--tab-color);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.auth-forgot-button:hover {
+  color: var(--tab-hover);
+  text-shadow: 0 0 8px var(--accent-glow);
+}
+
+.auth-title-glow:hover {
+  text-shadow:
+    0 0 10px var(--accent-glow),
+    0 0 20px var(--accent-glow),
+    0 0 40px var(--accent-glow);
+
+  transform: scale(1.03);
+}

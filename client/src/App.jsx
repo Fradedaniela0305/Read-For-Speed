@@ -18,8 +18,11 @@ import MainLayout from "./layouts/MainLayout";
 import Stats from "./pages/Stats";
 import Profile from "./pages/Profile";
 import SetTheme from "./pages/SetTheme"
+
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp"
+import ForgotPassword from "./pages/ForgotPassword";
+
 import RequireAuth from "./guards/RequireAuth";
 import RequireBaselineTest from "./guards/RequireBaselineTest";
 import PreventBaseline from "./guards/PreventBaseline";
@@ -41,6 +44,7 @@ export default function App() {
                     <Route path="/" element={<Navigate to="/signin" replace />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/signin" element={<SignIn />} />
+                    <Route path="/signin/forgot-password" element={<ForgotPassword />} />
                     <Route element={<RequireAuth />}>
                         <Route element={<ProfileContextProvider />}>
                             <Route element={<PreventBaseline />} >

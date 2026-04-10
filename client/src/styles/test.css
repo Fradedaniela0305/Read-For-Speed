@@ -565,3 +565,127 @@
         inset 0 0 6px rgba(255, 255, 255, 0.05),
         0 3px 10px rgba(0, 0, 0, 0.4);
 }
+
+.progress-outro {
+  min-height: 100vh;          /* take full screen height */
+  display: flex;
+  justify-content: center;    /* horizontal center */
+  align-items: center;        
+  padding: 2rem 1rem;
+  color: var(--text);
+}
+
+
+.progress-outro-panel {
+  width: min(900px, 100%);
+  background: linear-gradient(180deg, var(--panel) 0%, var(--panel-dark) 100%);
+  border: 1px solid var(--accent-glow);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow:
+    0 0 30px rgba(0, 0, 0, 0.25),
+    0 0 20px var(--accent-glow);
+  text-align: center;
+}
+
+.progress-outro-title {
+  margin: 0 0 0.5rem;
+  font-size: 2rem;
+  color: var(--accent);
+}
+
+.progress-outro-subtitle {
+  margin: 0 0 2rem;
+  color: var(--text);
+  opacity: 0.85;
+}
+
+.progress-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.progress-stat-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.25rem 1rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.progress-stat-label {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+}
+
+.progress-stat-value {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--accent);
+}
+
+.progress-stat-previous {
+  margin: 0.6rem 0 0.75rem;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.progress-diff {
+  display: inline-block;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.progress-positive {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.progress-negative {
+  color: #ff8a8a;
+  background: rgba(255, 90, 90, 0.12);
+}
+
+.progress-neutral {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.progress-outro-button {
+  background: var(--accent);
+  color: var(--bg-bottom);
+  border: none;
+  border-radius: 999px;
+  padding: 0.9rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0 16px var(--accent-glow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.progress-outro-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 24px var(--accent-glow);
+}
+
+@media (max-width: 768px) {
+  .progress-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .progress-outro-panel {
+    padding: 1.5rem;
+  }
+
+  .progress-outro-title {
+    font-size: 1.6rem;
+  }
+}

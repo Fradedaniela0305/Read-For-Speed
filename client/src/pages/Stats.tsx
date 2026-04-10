@@ -32,6 +32,10 @@ export default function Stats() {
 
     }, []);
 
+    if (loadingProfile) {
+        return <>Loading...</>
+    }
+
 
 
 

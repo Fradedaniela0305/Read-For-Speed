@@ -38,7 +38,7 @@ export default function SignUp() {
         <div className="auth-container">
             <form onSubmit={handleSignUp} className="auth-panel">
 
-                <h2 className="auth-title">Sign up today</h2>
+                <h2 className="auth-title">Sign up to <br/> <span className="auth-title-glow"> Read. For Speed </span> </h2>
 
                 <p className="auth-subtext">
                     Already have an account?
