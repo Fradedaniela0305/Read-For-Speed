@@ -31,8 +31,8 @@ export default function TestTab() {
             <div className="test-left">
                 <div className="test-action-group">
 
-                    
-                    <button className="take-test-button" disabled={!canTakeTest} onClick={() => {navigate("/progresstest")}}>
+
+                    <button className="take-test-button" disabled={!canTakeTest} onClick={() => { navigate("/progresstest") }}>
                         Take Test
                     </button>
 
@@ -45,14 +45,18 @@ export default function TestTab() {
 
             <div className="test-right">
                 <div className="mascot-placeholder">
-                    <h1>MASCOT</h1>
+                    <img
+                        src={canTakeTest ? "/test-open-wizard.png" : "/test-closed-wizard.png"}
+                        alt="Test Wizard"
+                        className={`wizard-image ${canTakeTest ? "wizard-open" : "wizard-closed"}`}
+                    />
                 </div>
 
                 <div className="test-message">
                     {canTakeTest ? (
                         <p>
                             The path is open <br />
-                            Take the test and see whether you can raise your speed.
+                            Test your new speed traveller
                         </p>
                     ) : (
                         <p>

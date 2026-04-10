@@ -7,7 +7,7 @@ type baselineTestIntroProps = {
     setStart: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function BaselineTestIntro({ setStart } : baselineTestIntroProps) {
+export default function BaselineTestIntro({ setStart }: baselineTestIntroProps) {
 
     return (
         <div className="baseline-container">
@@ -41,7 +41,13 @@ export default function BaselineTestIntro({ setStart } : baselineTestIntroProps)
                 <button onClick={() => setStart(true)}>LET'S GO</button>
             </div>
 
-            <div className="baseline-mascot">mascot placeholder</div>
+            <div className="baseline-mascot">
+                <img
+                    src="/test-intro-wizard.png"
+                    alt="Wizard mascot"
+                    className="baseline-mascot-image"
+                />
+            </div>
         </div>
     );
 

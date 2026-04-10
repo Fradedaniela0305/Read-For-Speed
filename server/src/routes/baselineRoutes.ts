@@ -12,7 +12,7 @@ type BaselineTestParams = {
 
 
 type SubmitBaselineBody = {
-    baselineTestId: number | string;
+    testId: string;
     answers: string[];
     correctAnswers: string[];
     readingTimeSeconds: number;
@@ -92,15 +92,18 @@ router.post(
     async (req: Request<{}, {}, SubmitBaselineBody>, res: Response) => {
         try {
             const {
-                baselineTestId,
+                testId,
                 correctAnswers,
                 answers,
                 readingTimeSeconds,
                 wordCount,
             } = req.body;
 
+            console.log(req.body);
+            console.log(testId);
+
             if (
-                baselineTestId == null ||
+                testId == null ||
                 !Array.isArray(correctAnswers) ||
                 !Array.isArray(answers) ||
                 correctAnswers.length === 0 ||
@@ -122,7 +125,7 @@ router.post(
 
             const { error } = await supabaseAdmin.rpc("submit_baseline_attempt", {
                 p_user_id: userId,
-                p_baseline_test_id: baselineTestId,
+                p_baseline_test_id: testId,
                 p_reading_time_seconds: readingTimeSeconds,
                 p_wpm: wpm,
                 p_accuracy: accuracy,

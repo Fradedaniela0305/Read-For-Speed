@@ -7,7 +7,7 @@ import Heatmap from "../components/Heatmap"
 
 
 type HeatmapStatsResponse = {
-     data: HeatmapStats[];
+    data: HeatmapStats[];
 }
 
 export default function Stats() {
@@ -52,13 +52,14 @@ export default function Stats() {
             </div>
 
             <div className="stats-right">
-                <h1>Image place holder</h1>
+                <img
+                    src="/stats-wizard.png"
+                    alt="Stats Wizard"
+                    className="stats-wizard"
+                />
 
-                <Heatmap data={heatmapStats}/>
+                <Heatmap data={heatmapStats} />
                 <h1>HeatMap Coming Soon</h1>
-
-
-
             </div>
         </div>
     );

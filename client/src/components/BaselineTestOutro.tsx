@@ -6,14 +6,14 @@ type BaselineTestOutroProps = {
     success: boolean;
     wpm: number;
     accuracy: number;
-    efficientWPM: number;
+    effectiveWPM: number;
   };
 };
 
 export default function BaselineTestOutro({ data }: BaselineTestOutroProps) {
   const navigate = useNavigate();
 
-  const { success, wpm, accuracy, efficientWPM } = data;
+  const { success, wpm, accuracy, effectiveWPM } = data;
 
   if (!success) {
     return <h1 className="error-text">Something went wrong</h1>;
@@ -42,7 +42,7 @@ export default function BaselineTestOutro({ data }: BaselineTestOutroProps) {
 
           <div className="stat-box">
             <span className="stat-label">Effective WPM</span>
-            <span className="stat-value">{efficientWPM}</span>
+            <span className="stat-value">{effectiveWPM}</span>
           </div>
         </div>
 
