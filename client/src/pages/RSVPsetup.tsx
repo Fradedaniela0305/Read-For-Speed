@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/rsvp.css"
 import { RSVPReaderState } from "../types/RSVP"
+import BackButton from "../components/BackButton";
 
 export default function RSVPSetupPage() {
     const [text, setText] = useState<string>("");
@@ -21,6 +22,7 @@ export default function RSVPSetupPage() {
 
     return (
         <div className="rsvp-setup-page">
+            <BackButton navigateBackTo={"/train"}/>
             <div className="rsvp-setup-card">
                 <h1 className="rsvp-setup-title">Paste your text</h1>
                 <p className="rsvp-setup-subtitle">
