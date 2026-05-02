@@ -1,147 +1,81 @@
-## Read. For Speed.
+# Read. For Speed
 
-A full-stack reading training platform built to measure not just how fast you read — but how well you understand.
+Read. For Speed is a full-stack web application that helps users improve reading speed while maintaining comprehension. It combines RSVP-based reading drills, timed comprehension tests, and progress tracking to create a measurable training system.
 
----
+## Features
 
-## Status
+- RSVP reader that uses user's effective words per minute
+- Baseline test to measure initial reading speed and comprehension
+- Progress tests unlocked after training sessions
+- Multiple-choice comprehension questions
+- User performance metrics: WPM, accuracy, and effective WPM
+- Secure authentication and persistent user profiles
 
-Work in progress — and getting more complicated every time I touch it.
+## Screenshots
 
----
+### RSVP Training
+![RSVP Training](./assets/rsvp.png)
 
-## Overview
+Users train with a focused RSVP reader that displays text at a controlled pace.
 
-Read. For Speed. is a full-stack web application designed to help users improve their reading speed while maintaining comprehension.
+### Test Start
+![Test Page Closed](./assets/test-page-closed.png)
 
-Instead of treating speed as the only metric, the platform combines:
+Users begin a timed reading test to measure baseline or progress performance.
 
-- Words per minute (WPM)  
-- Comprehension accuracy  
-- Effective WPM (speed × understanding)  
+### Reading Phase
+![Test Reading](./assets/test-reading.png)
 
-The goal is to create a system where progress is measured meaningfully, not just maximized blindly.
+The reading passage is presented in a distraction-free interface while reading time is tracked.
 
----
+### Comprehension Questions
+![Test Questions](./assets/test-questions.png)
+
+Users answer multiple-choice questions to validate comprehension.
+
+### Test Results
+![Test Results](./assets/test-page-open.png)
+
+Results show reading speed, comprehension accuracy, and effective WPM.
 
 ## Tech Stack
 
-### Frontend
-- React  
-- TypeScript  
-- Vite  
+**Frontend:** React, Vite, TypeScript, CSS  
+**Backend:** Node.js, Express, TypeScript  
+**Database/Auth:** Supabase, PostgreSQL  
+**Testing:** Vitest, Supertest
 
-### Backend
-- Node.js  
-- Express  
+## Architecture Highlights
 
-### Database & Auth
-- Supabase  
+- JWT-based authentication using Supabase
+- Protected API routes with Express middleware
+- Persistent user profiles and progress data
+- Baseline and progress testing system
+- Training eligibility logic based on completed sessions
+- Atomic database updates using Supabase RPC functions
 
----
+## API Overview
 
-## Core Features
+GET    /api/baseline/test
+GET    /api/baseline/questions/:baselineTestId
+POST   /api/baseline/submit
 
-### Baseline Assessment
+POST   /api/rsvp/results
 
-New users begin with a baseline test that determines:
+GET    /api/progress/fetch
+GET    /api/stats/heatmap
 
-- Reading speed (WPM)  
-- Comprehension accuracy  
-- Effective WPM  
+## Core Metrics
 
-This establishes a personalized starting point for training.
+WPM = wordCount / (readingTimeSeconds / 60)
 
----
+accuracy = correctAnswers / totalQuestions
 
-### RSVP Reading Mode
+effectiveWPM = WPM × accuracy
 
-Implements Rapid Serial Visual Presentation (RSVP):
+## Future Improvements
 
-- Words displayed one at a time  
-- Reduces eye movement  
-- Encourages faster reading pacing  
-
----
-
-### Results & Metrics
-
-After each session, users receive:
-
-- WPM  
-- Accuracy  
-- Effective WPM  
-
-The goal is to make feedback feel clear and motivating rather than overwhelming.
-
----
-
-### Authentication & User Data
-
-- Supabase authentication  
-- Secure user profiles  
-- Persistent tracking of performance metrics  
-
----
-
-### Backend Architecture
-
-- REST API built with Express  
-- Authenticated routes  
-- Structured endpoints for baseline tests, user profiles, and performance data  
-
----
-
-## How It Works
-
-Effective reading speed is calculated as:
-
-Effective WPM = WPM × Accuracy
-
-This prevents users from optimizing for speed alone and encourages balanced improvement.
-
----
-
-## What I’m Building Next
-
-- Unlock system (new test after every 5 training sessions)  
-- Adaptive WPM recalibration  
-- Chunked RSVP mode  
-- Speed drills  
-- WPM leaderboard  
-
----
-
-## Challenges & Design Decisions
-
-### Balancing Speed vs Understanding
-
-A fast reader who understands nothing is not improving.  
-This is why effective WPM is the core metric.
-
----
-
-### Data Flow & State Management
-
-Handling timed reading sessions, navigation between test -> questions -> results, and syncing frontend state with backend required careful structure across React and API boundaries.
-
----
-
-### Supabase Integration
-
-- Auth sessions  
-- Protected routes  
-- Database updates tied to user actions  
-
----
-## Future Vision
-
-The goal is to evolve this into:
-
-- A structured training platform  
-- A performance tracker  
-- A system that adapts to each user  
-
----
-
-
+- Additional training methods
+  - Speed drills (in progress)
+  - Chunked RSVP reading (in progress)
+- Expand testing database
