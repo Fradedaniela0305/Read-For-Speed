@@ -5,14 +5,15 @@ type TrainButtonConfig = {
   to: string;
   label: string;
   image: string;
+  comingSoon: boolean;
 };
 
 export default function Train() {
 
   const buttons: TrainButtonConfig[] = [
-    { to: "/rsvpsetup", label: "RSVP", image: "/icon-wizard.png" },
-    { to: "/chunked", label: "Chunked RSVP", image: "/icon-wizard.png" },
-    { to: "/drills", label: "Speed Drills", image: "/icon-wizard.png" },
+    { to: "/rsvpsetup", label: "RSVP", image: "/icon-wizard.png", comingSoon: false },
+    { to: "/chunked", label: "Chunked RSVP", image: "/icon-wizard.png", comingSoon: true},
+    { to: "/drills", label: "Speed Drills", image: "/icon-wizard.png", comingSoon: true},
   ];
 
   return (
@@ -29,6 +30,7 @@ export default function Train() {
             to={b.to}
             label={b.label}
             image={b.image}
+            comingSoon={b.comingSoon}
           />
         ))}
       </div>

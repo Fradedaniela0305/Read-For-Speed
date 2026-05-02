@@ -76,3 +76,15 @@
   height: auto;
 
 }
+.train-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.train-button:disabled:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--accent);
+}
