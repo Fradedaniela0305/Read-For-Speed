@@ -11,6 +11,10 @@ Read. For Speed is a full-stack web application that helps users improve reading
 - User performance metrics: WPM, accuracy, and effective WPM
 - Secure authentication and persistent user profiles
 
+## Live Demo
+
+Try it here: https://read-for-speed.vercel.app
+
 ## Screenshots
 
 ### RSVP Training
