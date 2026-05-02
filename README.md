@@ -35,7 +35,7 @@ The reading passage is presented in a distraction-free interface while reading t
 Users answer multiple-choice questions to validate comprehension.
 
 ### Test Results
-![Test Results](./assets/test-page-open.png)
+![Test Results](./assets/test-results.png)
 
 Results show reading speed, comprehension accuracy, and effective WPM.
 
