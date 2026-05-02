@@ -18,12 +18,13 @@ Read. For Speed is a full-stack web application that helps users improve reading
 
 Users train with a focused RSVP reader that displays text at a controlled pace.
 
-### Test Start
+### Test Open and Closed
 ![Test Page Closed](./assets/test-page-closed.png)
+![Test Results](./assets/test-page-open.png)
 
 Users begin a timed reading test to measure baseline or progress performance.
 
-### Reading Phase
+### Reading Test
 ![Test Reading](./assets/test-reading.png)
 
 The reading passage is presented in a distraction-free interface while reading time is tracked.
