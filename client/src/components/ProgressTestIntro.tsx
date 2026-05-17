@@ -41,7 +41,7 @@ export default function ProgressTestIntro({ setStart }: ProgressTestIntroProps) 
         <button onClick={() => setStart(true)}>LET'S GO</button>
       </div>
 
-      <div className="baseline-mascot">mascot placeholder</div>
+      <img src="/test-intro-wizard.png" alt="mascot" className="baseline-mascot"/>
     </div>
   );
 }

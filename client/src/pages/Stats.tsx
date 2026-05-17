@@ -4,23 +4,35 @@ import { useEffect, useState } from "react"
 import { apiRequest } from "../api/client";
 import type { HeatmapStats } from "../types/stats";
 import Heatmap from "../components/Heatmap"
-
+import ProgressGraph from "../components/ProgressGraph";
 
 type HeatmapStatsResponse = {
     data: HeatmapStats[];
+}
+
+type ProgressGraphPoint = {
+    id: string;
+    effective_wpm: number;
+    created_at: string;
+}
+
+type ProgressGraphResponse = {
+    data: ProgressGraphPoint[];
 }
 
 export default function Stats() {
 
 
     const { profile, loadingProfile } = useProfile();
-    const [heatmapStats, setHeatmapStats] = useState<HeatmapStats[]>(null);
+    const [heatmapStats, setHeatmapStats] = useState<HeatmapStats[]>([]);
+    const [graphData, setGraphData] = useState<ProgressGraphPoint[]>([]);
 
     useEffect(() => {
         const fetchHeatmapStats = async () => {
             try {
                 const heatMapStats = await apiRequest<HeatmapStatsResponse>("/stats/heatmap");
                 setHeatmapStats(heatMapStats.data);
+                console.log(heatMapStats.data);
             } catch (err) {
                 console.error(err);
             }
@@ -29,6 +41,29 @@ export default function Stats() {
         console.log(heatmapStats);
 
         fetchHeatmapStats();
+
+    }, []);
+
+
+    useEffect(() => {
+
+        const fetchStats = async () => {
+            try {
+
+                const [heatmapResponse, graphResponse] = await Promise.all([
+                    apiRequest<HeatmapStatsResponse>("/stats/heatmap"),
+                    apiRequest<ProgressGraphResponse>("/stats/graph"),
+                ]);
+
+                setHeatmapStats(heatmapResponse.data);
+                setGraphData(graphResponse.data);
+
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        fetchStats();
 
     }, []);
 
@@ -58,8 +93,11 @@ export default function Stats() {
                     className="stats-wizard"
                 />
 
-                <Heatmap data={heatmapStats} />
-                <h1>HeatMap Coming Soon</h1>
+                <div className="stats-graphs-row">
+                    <Heatmap data={heatmapStats} />
+
+                    <ProgressGraph data={graphData} />
+                </div>
             </div>
         </div>
     );

@@ -47,9 +47,7 @@ export default function RSVPResult() {
 
 
                     <div className="rsvp-result-right">
-                        <div className="rsvp-mascot-placeholder">
-                            <h2>Mascot</h2>
-                        </div>
+                          <img src="/icon-wizard.png" alt="mascot" className="rsvp-mascot-placeholder"/>
                     </div>
 
                 </div>
