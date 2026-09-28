@@ -1,7 +1,5 @@
 import {LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid} from "recharts";
 
-import "../styles/stats.css";
-
 type ProgressGraphPoint = {
   id: string;
   effective_wpm: number;
@@ -30,7 +28,7 @@ export default function ProgressGraph({ data }: ProgressGraphProps) {
   }));
 
   return (
-    <div className="progress-graph-container">
+    <div className="progress-graph-container flex-1 min-w-0">
       <h2 className="progress-graph-title">
         Effective Reading Speed Progress
       </h2>

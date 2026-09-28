@@ -1,5 +1,4 @@
 import TrainButton from "../components/TrainButton";
-import "../styles/train.css";
 
 type TrainButtonConfig = {
   to: string;
@@ -17,13 +16,13 @@ export default function Train() {
   ];
 
   return (
-    <div className="train-page">
+    <div>
 
-      <div className="train-wizard">
-        <img src="/train-wizard.png" alt="Training Wizard" />
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1/2 flex justify-center items-center">
+        <img src="/train-wizard.png" alt="Training Wizard" className="w-[1000px] max-w-full h-auto" />
       </div>
 
-      <div className="train-button-container">
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[35%] max-w-[900px] flex flex-col gap-8">
         {buttons.map((b) => (
           <TrainButton
             key={b.to}
