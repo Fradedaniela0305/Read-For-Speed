@@ -76,8 +76,8 @@ export default function Stats() {
 
     return (
 
-        <div className="stats-page">
-            <div className="stats-left">
+        <div className="h-screen flex gap-10 p-10 items-start overflow-y-auto box-border">
+            <div className="flex-[0_0_380px] mt-20">
                 <StatsProfileCard
                     wpm={profile?.current_wpm}
                     accuracy={profile?.current_accuracy}
@@ -86,14 +86,14 @@ export default function Stats() {
                 />
             </div>
 
-            <div className="stats-right">
+            <div className="flex-1 flex flex-col items-center justify-start gap-6">
                 <img
                     src="/stats-wizard.png"
                     alt="Stats Wizard"
-                    className="stats-wizard"
+                    className="w-[600px] max-w-full h-auto object-contain"
                 />
 
-                <div className="stats-graphs-row">
+                <div className="w-full flex gap-6 items-stretch">
                     <Heatmap data={heatmapStats} />
 
                     <ProgressGraph data={graphData} />

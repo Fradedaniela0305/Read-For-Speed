@@ -1,0 +1,190 @@
+@import "tailwindcss";
+
+:root {
+  --bg-top: rgba(120, 100, 60, 0.12);
+  --bg-main: #111111;
+  --bg-mid: #1a1714;
+  --bg-bottom: #0d0d0d;
+
+  --text: #e8dec7;
+  --panel: rgba(60, 52, 38, 0.95);
+  --panel-dark: rgba(28, 24, 20, 0.95);
+
+  --accent: rgba(201, 169, 97, 0.45);
+  --accent-glow: rgba(201, 169, 97, 0.18);
+
+  --nav-bg: rgba(10, 10, 10, 0.92);
+  --tab-color: #cfc4ab;
+  --tab-hover: #f0dfb0;
+
+  --heatmap-0: rgba(240, 223, 176, 0.08);
+  --heatmap-1: rgba(240, 223, 176, 0.25);
+  --heatmap-2: rgba(240, 223, 176, 0.45);
+  --heatmap-3: rgba(240, 223, 176, 0.7);
+  --heatmap-4: #f0dfb0;
+}
+
+.theme-fantasy {
+  --bg-top: rgba(150, 100, 200, 0.25);
+  --bg-main: #14131a;
+  --bg-mid: #1f1c28;
+  --bg-bottom: #0d0c12;
+
+  --text: #fff4d6;
+  --panel: rgba(70, 55, 95, 0.98);
+  --panel-dark: rgba(40, 32, 60, 0.98);
+
+  --accent: #ffd98a;
+  --accent-glow: rgba(255, 217, 138, 0.4);
+
+  --nav-bg: rgba(12, 12, 18, 0.98);
+  --tab-color: #e6d8b5;
+  --tab-hover: #ffd98a;
+
+  --heatmap-0: rgba(255, 217, 138, 0.08);
+  --heatmap-1: rgba(255, 217, 138, 0.25);
+  --heatmap-2: rgba(255, 217, 138, 0.45);
+  --heatmap-3: rgba(255, 217, 138, 0.7);
+  --heatmap-4: #ffd98a;
+}
+
+.theme-nature {
+  --bg-top: rgba(120, 180, 120, 0.25);
+  --bg-main: #0b1a12;
+  --bg-mid: #13261a;
+  --bg-bottom: #050d08;
+
+  --text: #f0ffe6;
+  --panel: rgba(50, 90, 65, 0.98);
+  --panel-dark: rgba(28, 55, 40, 0.98);
+
+  --accent: #8fe388;
+  --accent-glow: rgba(143, 227, 136, 0.4);
+
+  --nav-bg: rgba(10, 20, 14, 0.98);
+  --tab-color: #d6f2cc;
+  --tab-hover: #8fe388;
+
+  --heatmap-0: rgba(143, 227, 136, 0.08);
+  --heatmap-1: rgba(143, 227, 136, 0.25);
+  --heatmap-2: rgba(143, 227, 136, 0.45);
+  --heatmap-3: rgba(143, 227, 136, 0.7);
+  --heatmap-4: #8fe388;
+}
+
+.theme-arcane {
+  --bg-top: rgba(140, 120, 255, 0.25);
+  --bg-main: #0f0e1a;
+  --bg-mid: #191735;
+  --bg-bottom: #07060d;
+
+  --text: #f3edff;
+  --panel: rgba(70, 60, 120, 0.98);
+  --panel-dark: rgba(40, 36, 85, 0.98);
+
+  --accent: #bfa6ff;
+  --accent-glow: rgba(191, 166, 255, 0.45);
+
+  --nav-bg: rgba(12, 12, 22, 0.98);
+  --tab-color: #e4dcff;
+  --tab-hover: #bfa6ff;
+
+  --heatmap-0: rgba(191, 166, 255, 0.08);
+  --heatmap-1: rgba(191, 166, 255, 0.25);
+  --heatmap-2: rgba(191, 166, 255, 0.45);
+  --heatmap-3: rgba(191, 166, 255, 0.7);
+  --heatmap-4: #bfa6ff;
+}
+
+.theme-horror {
+  --bg-top: rgba(120, 30, 30, 0.3);
+  --bg-main: #050505;
+  --bg-mid: #0f0a0a;
+  --bg-bottom: #000000;
+
+  --text: #f2e9e4;
+  --panel: rgba(60, 25, 25, 0.98);
+  --panel-dark: rgba(25, 10, 10, 0.98);
+
+  --accent: #ff4d4d;
+  --accent-glow: rgba(255, 77, 77, 0.4);
+
+  --nav-bg: rgba(5, 5, 5, 0.98);
+  --tab-color: #e0d6d0;
+  --tab-hover: #ff4d4d;
+
+  --heatmap-0: rgba(255, 77, 77, 0.08);
+  --heatmap-1: rgba(255, 77, 77, 0.25);
+  --heatmap-2: rgba(255, 77, 77, 0.45);
+  --heatmap-3: rgba(255, 77, 77, 0.7);
+  --heatmap-4: #ff4d4d;
+}
+
+/*
+  Bridges the runtime theme custom properties above into Tailwind utilities
+  (bg-panel, text-accent, border-accent, etc). Because these reference the
+  underlying var(--*) rather than a static value, the utilities re-resolve
+  automatically whenever the .theme-* class on the app wrapper changes.
+*/
+@theme inline {
+  --color-bg-top: var(--bg-top);
+  --color-bg-main: var(--bg-main);
+  --color-bg-mid: var(--bg-mid);
+  --color-bg-bottom: var(--bg-bottom);
+
+  --color-text: var(--text);
+  --color-text-muted: var(--tab-color);
+
+  --color-panel: var(--panel);
+  --color-panel-dark: var(--panel-dark);
+
+  --color-accent: var(--accent);
+  --color-accent-glow: var(--accent-glow);
+
+  --color-nav-bg: var(--nav-bg);
+  --color-tab: var(--tab-color);
+  --color-tab-hover: var(--tab-hover);
+
+  --color-heatmap-0: var(--heatmap-0);
+  --color-heatmap-1: var(--heatmap-1);
+  --color-heatmap-2: var(--heatmap-2);
+  --color-heatmap-3: var(--heatmap-3);
+  --color-heatmap-4: var(--heatmap-4);
+
+  --animate-shine: shine 2.8s linear infinite;
+  --animate-float: float 4s ease-in-out infinite;
+}
+
+@keyframes shine {
+  from {
+    left: -35%;
+  }
+  to {
+    left: 120%;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+/* Not expressible as Tailwind utilities: vendor-prefixed scrollbar pseudo-elements. */
+.scroll-text-window::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scroll-text-window::-webkit-scrollbar-track {
+  background: rgba(91, 66, 32, 0.15);
+  border-radius: 999px;
+}
+
+.scroll-text-window::-webkit-scrollbar-thumb {
+  background: rgba(99, 72, 38, 0.5);
+  border-radius: 999px;
+}

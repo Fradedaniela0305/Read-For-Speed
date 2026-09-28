@@ -39,7 +39,9 @@ export default function App() {
 
     return (
         <>
-            <div className={`app theme-${theme}`}>
+            <div
+                className={`theme-${theme} min-h-screen bg-[radial-gradient(circle_at_top,var(--bg-top),transparent_35%),linear-gradient(to_bottom,var(--bg-main),var(--bg-mid)_40%,var(--bg-bottom)_100%)] text-text m-0 p-0 text-center font-[Georgia,'Times_New_Roman',serif]`}
+            >
                 <Routes>
                     <Route path="/" element={<Navigate to="/signin" replace />} />
                     <Route path="/signup" element={<SignUp />} />
